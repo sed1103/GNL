@@ -37,7 +37,6 @@ void	fill_buff(char **buff, int fd)
 			return;
 		}
 		temp[sz] = '\0';
-		system("leaks a.out");
 		tmp1 = *buff;
 		*buff = ft_strjoin(*buff, temp);
 		free(tmp1);
@@ -84,27 +83,34 @@ char *get_next_line(int fd)
 	return (send);
 }
 
-int main()
-{
-	int fd;
-	char *str1;
+// int main()
+// {
+// 	int fd;
+// 	char *str1;
 
-	fd = open("gnlTester/files/42_with_nl", O_RDONLY);
-	printf("%s", get_next_line(fd));
-	printf("%s", get_next_line(fd));
-	close(fd);
-	// printf("%s", get_next_line(fd));
-	// printf("%s", get_next_line(fd));
-	// printf("%s\n", get_next_line(fd));
-	// printf("%s\n", get_next_line(fd));
-	// printf("%s\n", get_next_line(fd));
-	// printf("%s\n", get_next_line(fd));
-	//str1 = get_next_line(fd);
-	//printf("%s", str1);
-	//free(str1);
+// 	fd = open("file.txt", O_RDONLY);
+// 	str1 = get_next_line(fd);
+// 	while(str1 != NULL)
+// 	{
+// 		printf("%s",str1);
+// 		free(str1);
+// 		str1 = get_next_line(fd);
+// 	}
+// 	system("leaks a.out");
+
+// 	close(fd);
+// 	// printf("%s", get_next_line(fd));
+// 	// printf("%s", get_next_line(fd));
+// 	// printf("%s\n", get_next_line(fd));
+// 	// printf("%s\n", get_next_line(fd));
+// 	// printf("%s\n", get_next_line(fd));
+// 	// printf("%s\n", get_next_line(fd));
+// 	//str1 = get_next_line(fd);
+// 	//printf("%s", str1);
+// 	//free(str1);
 	
-	//printf("%s\n", get_next_line(fd));
-	//printf("%s\n", get_next_line(fd));
+// 	//printf("%s\n", get_next_line(fd));
+// 	//printf("%s\n", get_next_line(fd));
 	
-	return (0);
-}
+// 	return (0);
+// }
