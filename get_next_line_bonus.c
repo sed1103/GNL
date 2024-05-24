@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: skirakos <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/23 20:19:33 by skirakos          #+#    #+#             */
-/*   Updated: 2024/04/23 20:19:35 by skirakos         ###   ########.fr       */
+/*   Created: 2024/04/23 20:06:07 by skirakos          #+#    #+#             */
+/*   Updated: 2024/04/23 20:06:08 by skirakos         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	find_new_line(char *buff)
 {
@@ -74,23 +74,23 @@ void	fill_buff(char **buff, int fd)
 
 char	*get_next_line(int fd)
 {
-	static char		*buff;
+	static char		*buff[OPEN_MAX];
 	char			*send;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
-	fill_buff(&buff, fd);
-	if (find_new_line(buff) != -1)
+	fill_buff(&buff[fd], fd);
+	if (find_new_line(buff[fd]) != -1)
 	{
-		send = ft_substr(buff, 0, find_new_line(buff) + 1, 0);
-		buff = ft_substr(buff, find_new_line(buff) + 1,
-				ft_strlen(buff) - find_new_line(buff), 1);
+		send = ft_substr(buff[fd], 0, find_new_line(buff[fd]) + 1, 0);
+		buff[fd] = ft_substr(buff[fd], find_new_line(buff[fd]) + 1,
+				ft_strlen(buff[fd]) - find_new_line(buff[fd]), 1);
 	}
 	else
 	{
-		send = ft_substr(buff, 0, ft_strlen(buff), 0);
-		free(buff);
-		buff = NULL;
+		send = ft_substr(buff[fd], 0, ft_strlen(buff[fd]), 0);
+		free(buff[fd]);
+		buff[fd] = NULL;
 	}
-	return (ft_check(&buff, &send, fd));
+	return (ft_check(&buff[fd], &send, fd));
 }
